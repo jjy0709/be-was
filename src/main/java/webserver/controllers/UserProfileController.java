@@ -28,6 +28,7 @@ public class UserProfileController implements Controller {
         Map<String, String> attributes = new HashMap<>();
         String fileName = "src/main/resources/templates/user/profile.html";
         Session userSession = getSession(request.cookie().getSessionId());
+        // todo: 다른 유저 프로필 보려는 요청일 경우 구현
         User user = userSession.getUser();
 
         attributes.put("${user}", "<li style=\"pointer-events: none;\" ><a>" + userSession.getUser().getName() + " 님</a></li>");
