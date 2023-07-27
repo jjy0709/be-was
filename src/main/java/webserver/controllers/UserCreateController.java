@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-import static service.UserService.addUser;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
 
 @RequestPath(path = "/user/create")
@@ -40,7 +39,7 @@ public class UserCreateController implements Controller {
         logger.info("User info: userId: {}, password: {}, name: {}, email: {}", user.getUserId(), user.getPassword(), user.getName(), user.getEmail());
 
         String path = "/index.html";
-        if (!addUser(user)) {
+        if (userService.saveUser(user)) {
             path = "/user/create_failed.html";
         }
 

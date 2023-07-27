@@ -12,8 +12,6 @@ import webserver.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static db.Users.findUserById;
-import static service.SessionService.getSession;
 import static webserver.http.Cookie.isValidCookie;
 
 @RequestPath(path = "/user/profile.html")
@@ -28,7 +26,7 @@ public class UserProfileController implements Controller {
 
         Map<String, String> attributes = new HashMap<>();
         String fileName = "src/main/resources/templates/user/profile.html";
-        Session userSession = getSession(request.cookie().getSessionId());
+        Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = getUserInfo(userSession, request);
 
         attributes.put("${user}", "<li style=\"pointer-events: none;\" ><a>" + userSession.getUser().getName() + " 님</a></li>");
@@ -39,14 +37,14 @@ public class UserProfileController implements Controller {
     }
 
     private User getUserInfo(Session userSession, HttpRequest request) {
-        if(!request.uri().hasParameter())
+        if (!request.uri().hasParameter())
             return userSession.getUser();
 
         String userId = request.uri().getParameter("userId");
 
-        if(userId == null || findUserById(userId) == null)
+        if (userId == null || userService.searchUserById(userId) == null)
             return new User("null", "", "존재하지 않는 유저입니다.", "");
 
-        return findUserById(userId);
+        return userService.searchUserById(userId);
     }
 }

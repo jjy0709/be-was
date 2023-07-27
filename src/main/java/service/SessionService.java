@@ -4,20 +4,26 @@ import db.Sessions;
 import model.Session;
 
 public class SessionService {
-    public static void addSession(Session session) {
+    private static final SessionService sessionService = new SessionService();
+
+    public static SessionService getInstance() {
+        return sessionService;
+    }
+
+    public void saveSession(Session session) {
         Sessions.addSession(session);
     }
 
-    public static Session getSession(String sessionId) {
-        return Sessions.getSession(sessionId);
+    public Session searchSessionById(String sessionId) {
+        return Sessions.getSessionById(sessionId);
     }
 
-    public static boolean isValidSession(String sessionId) {
-        return Sessions.hasSession(sessionId);
+    public boolean isValidSession(String sessionId) {
+        return searchSessionById(sessionId) != null;
     }
 
-    public static void removeSession(Session session) {
-        Sessions.removeSession(session);
+    public void deleteSession(Session session) {
+        Sessions.removeSession(session.getSessionId());
     }
 
 }

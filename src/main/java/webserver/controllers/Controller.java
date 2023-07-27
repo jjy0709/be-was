@@ -1,5 +1,8 @@
 package webserver.controllers;
 
+import service.PostService;
+import service.SessionService;
+import service.UserService;
 import webserver.http.HttpRequest;
 import webserver.http.HttpResponse;
 import webserver.http.enums.HttpResponseStatus;
@@ -7,10 +10,12 @@ import webserver.http.enums.HttpResponseStatus;
 import java.util.HashMap;
 import java.util.Map;
 
-import static webserver.http.enums.HttpResponseStatus.FOUND;
-import static webserver.http.enums.HttpResponseStatus.OK;
-
 public interface Controller {
+
+    UserService userService = UserService.getInstance();
+    SessionService sessionService = SessionService.getInstance();
+    PostService postService = PostService.getInstance();
+
 
     // TODO: Exception으로 빼서 handle?
     default HttpResponse createErrorResponse(HttpRequest request, HttpResponseStatus status) {
@@ -30,7 +35,7 @@ public interface Controller {
     default HttpResponse createFoundResponse(HttpRequest request, String redirect) {
         HttpResponse.Builder builder = HttpResponse.newBuilder();
         return builder.version(request.version())
-                .status(FOUND)
+                .status(HttpResponseStatus.FOUND)
                 .redirect(redirect)
                 .build();
     }
@@ -38,7 +43,7 @@ public interface Controller {
     default HttpResponse createOkResponse(HttpRequest request, String filePath, Map<String, String> attr) {
         HttpResponse.Builder builder = HttpResponse.newBuilder();
         return builder.version(request.version())
-                .status(OK)
+                .status(HttpResponseStatus.OK)
                 .fileName(filePath)
                 .setAttribute(attr)
                 .build();

@@ -7,8 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class Users {
-    private static ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
     static {
+        // 테스트를 용이하게 하기 위한 default 유저
         users.put("user", new User("user", "pass", "test", "test@gmail.com"));
     }
 

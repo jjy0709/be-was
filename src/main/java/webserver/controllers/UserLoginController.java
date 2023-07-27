@@ -1,5 +1,6 @@
 package webserver.controllers;
 
+import model.Session;
 import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,14 +8,11 @@ import webserver.controllers.annotations.RequestMethod;
 import webserver.controllers.annotations.RequestPath;
 import webserver.http.HttpRequest;
 import webserver.http.HttpResponse;
-import model.Session;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import static db.Users.findUserById;
-import static service.SessionService.addSession;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
 import static webserver.http.enums.HttpResponseStatus.FOUND;
 
@@ -25,16 +23,15 @@ public class UserLoginController implements Controller {
     @RequestMethod(method = "POST")
     public HttpResponse handlePost(HttpRequest request) {
         Map<String, String> parameters = request.body();
-        if(!verifyParameter(parameters))
+        if (!verifyParameter(parameters))
             return createErrorResponse(request, BAD_REQUEST);
 
-        // todo: addUser in Service, findeUser in Database?
-        User loginUser = findUserById(parameters.get("userId"));
+        User loginUser = userService.searchUserById(parameters.get("userId"));
 
         HttpResponse.Builder builder = HttpResponse.newBuilder();
 
         String path = "/user/login_failed.html";
-        if(loginUser.getPassword().equals(parameters.get("password"))) {
+        if (loginUser.getPassword().equals(parameters.get("password"))) {
             path = "/index.html";
             Session session = createUserSession(loginUser);
             builder.sessionId(session.getSessionId());
@@ -50,17 +47,17 @@ public class UserLoginController implements Controller {
     private static Session createUserSession(User loginUser) {
         String sessionID = UUID.randomUUID().toString();
         Session session = new Session(sessionID, loginUser);
-        addSession(session);
+        sessionService.saveSession(session);
         return session;
     }
 
     private boolean verifyParameter(Map<String, String> parameters) {
         Set<String> essentialFields = Set.of("userId", "password");
-        if(!parameters.keySet().equals(essentialFields))
+        if (!parameters.keySet().equals(essentialFields))
             return false;
 
-        for (String field: essentialFields) {
-            if("".equals(parameters.get(field)))
+        for (String field : essentialFields) {
+            if ("".equals(parameters.get(field)))
                 return false;
         }
 

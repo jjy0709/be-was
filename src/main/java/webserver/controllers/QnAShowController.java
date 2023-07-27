@@ -13,8 +13,6 @@ import webserver.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static db.Posts.getPost;
-import static service.SessionService.getSession;
 import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
 
@@ -30,14 +28,14 @@ public class QnAShowController implements Controller{
 
         Map<String, String> attributes = new HashMap<>();
         String fileName = "src/main/resources/templates/qna/show.html";
-        Session userSession = getSession(request.cookie().getSessionId());
+        Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = userSession.getUser();
 
         String postIndex = request.uri().getParameter("index");
         if(postIndex == null)
             return createErrorResponse(request, BAD_REQUEST);
 
-        Post post = getPost(Integer.parseInt(postIndex));
+        Post post = postService.searchPostByIndex(Integer.parseInt(postIndex));
         if(post == null)
             return createErrorResponse(request, BAD_REQUEST);
 
@@ -46,12 +44,12 @@ public class QnAShowController implements Controller{
         attributes.put("${postUser}", post.getUser().getName());
         attributes.put("${postTime}", post.getTimeString());
 
-        putPostContent(attributes, post);
+        putPostContentToAttr(attributes, post);
 
         return createOkResponse(request, fileName, attributes);
     }
 
-    private void putPostContent(Map<String, String> attributes, Post post) {
+    private void putPostContentToAttr(Map<String, String> attributes, Post post) {
         StringBuilder stringBuilder = new StringBuilder();
 
         String[] lines = post.getContents().split("\n");

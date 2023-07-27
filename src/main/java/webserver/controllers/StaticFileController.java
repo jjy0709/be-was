@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static db.Posts.findAll;
-import static service.SessionService.getSession;
 import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.ContentType.HTML;
 import static webserver.http.enums.ContentType.getContentTypeOfFile;
@@ -54,7 +52,7 @@ public class StaticFileController implements Controller {
             return requestAttribute;
         }
 
-        Session session = getSession(request.cookie().getSessionId());
+        Session session = sessionService.searchSessionById(request.cookie().getSessionId());
         Map<String, String> userAttribute = new HashMap<>();
 
         userAttribute.put("${logout}", "");
@@ -73,28 +71,28 @@ public class StaticFileController implements Controller {
 
     private void addPostTags(Map<String, String> attributes) {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Post> postList = (List<Post>) findAll();
+        List<Post> postList = postService.searchAllPosts();
         int length = postList.size();
         for (int index = length - 1; index > -1; index--) {
             Post post = postList.get(index);
-            stringBuilder.append("<li>\n");
-            stringBuilder.append("<div class=\"wrap\">\n");
-            stringBuilder.append("<div class=\"main\">\n");
-            stringBuilder.append("<strong class=\"subject\">\n");
-            stringBuilder.append("<a href=\"./qna/show.html?index=" + (length - 1 - index) + "\">" + post.getTitle() + "</a>\n");
-            stringBuilder.append("</strong>\n");
-            stringBuilder.append("<div class=\"auth-info\">\n");
-            stringBuilder.append("<i class=\"icon-add-comment\"></i>\n");
-            stringBuilder.append("<span class=\"time\">" + post.getTimeString() + "</span>\n");
-            stringBuilder.append("<a href=\"./user/profile.html?userId=" + post.getUser().getUserId() + "\"class=\"author\">" + post.getUser().getName() + "</a>\n");
-            stringBuilder.append("</div>\n");
-            stringBuilder.append("<div class=\"reply\" title=\"댓글\">\n");
-            stringBuilder.append("<i class=\"icon-reply\"></i>\n");
-            stringBuilder.append("<span class=\"point\">0</span>\n");
-            stringBuilder.append("</div>\n");
-            stringBuilder.append("</div>\n");
-            stringBuilder.append("</div>\n");
-            stringBuilder.append("</li>");
+            stringBuilder.append("<li>\n")
+                    .append("<div class=\"wrap\">\n")
+                    .append("<div class=\"main\">\n")
+                    .append("<strong class=\"subject\">\n")
+                    .append("<a href=\"./qna/show.html?index=" + (index) + "\">" + post.getTitle() + "</a>\n")
+                    .append("</strong>\n")
+                    .append("<div class=\"auth-info\">\n")
+                    .append("<i class=\"icon-add-comment\"></i>\n")
+                    .append("<span class=\"time\">" + post.getTimeString() + "</span>\n")
+                    .append("<a href=\"./user/profile.html?userId=" + post.getUser().getUserId() + "\"class=\"author\">" + post.getUser().getName() + "</a>\n")
+                    .append("</div>\n")
+                    .append("<div class=\"reply\" title=\"댓글\">\n")
+                    .append("<i class=\"icon-reply\"></i>\n")
+                    .append("<span class=\"point\">" + (index + 1) + "</span>\n")
+                    .append("</div>\n")
+                    .append("</div>\n")
+                    .append("</div>\n")
+                    .append("</li>");
         }
         attributes.put("${postList}", stringBuilder.toString());
     }

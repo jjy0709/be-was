@@ -12,7 +12,6 @@ import webserver.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-import static service.SessionService.getSession;
 import static webserver.http.Cookie.isValidCookie;
 
 @RequestPath(path = "/qna/form.html")
@@ -27,7 +26,7 @@ public class QnAFormController implements Controller {
 
         Map<String, String> attributes = new HashMap<>();
         String fileName = "src/main/resources/templates/qna/form.html";
-        Session userSession = getSession(request.cookie().getSessionId());
+        Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = userSession.getUser();
 
         attributes.put("${user}", "<li style=\"pointer-events: none;\" ><a>" + userSession.getUser().getName() + " 님</a></li>");

@@ -13,8 +13,6 @@ import webserver.http.HttpResponse;
 import java.util.Map;
 import java.util.Set;
 
-import static db.Posts.addPost;
-import static service.SessionService.getSession;
 import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
 
@@ -38,20 +36,17 @@ public class QnAWriteController implements Controller {
             return createFoundResponse(request, "/qna/form_failed.html");
         }
 
-        Session session = getSession(request.cookie().getSessionId());
+        Session session = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = session.getUser();
 
         Post post = new Post(user, parameters.get("title"), parameters.get("contents"));
-        addPost(post);
+        postService.savePost(post);
 
         return createFoundResponse(request, "/index.html");
     }
 
     private boolean verifyParameter(Map<String, String> parameters) {
         Set<String> essentialField = Set.of("title", "contents");
-        if (!parameters.keySet().equals(essentialField)) {
-            return false;
-        }
-        return true;
+        return parameters.keySet().equals(essentialField);
     }
 }
