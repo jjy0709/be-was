@@ -58,14 +58,16 @@ public class HttpResponseRenderer {
     }
 
     private void responseBody(DataOutputStream dos, HttpResponse response) throws IOException {
-        ContentType contentType = getContentTypeOfFile(response.fileName());
-        int contentLength = 0;
-        byte[] body = new byte[0];
-
-        if (!"".equals(response.fileName())) {
-            body = reviseContentWithAttrs(response, contentType);
-            contentLength = body.length;
+        if (response.fileName() == null) {
+            dos.writeBytes("Content-Length: 0" + NEW_LINE);
+            dos.writeBytes("Content-Type: text/plain" + NEW_LINE);
+            dos.writeBytes(NEW_LINE);
+            return;
         }
+
+        ContentType contentType = getContentTypeOfFile(response.fileName());
+        byte[] body = reviseContentWithAttrs(response, contentType);
+        int contentLength = body.length;
 
         String contentTypeHeader = String.format("Content-Type: %s %s", contentType.getMIMEString(), NEW_LINE);
         String contentLengthHeader = String.format("Content-Length: %d %s", contentLength, NEW_LINE);
@@ -73,8 +75,8 @@ public class HttpResponseRenderer {
         dos.writeBytes(contentTypeHeader);
 //        logger.debug(contentTypeHeader);
         dos.writeBytes(contentLengthHeader);
-        dos.writeBytes(NEW_LINE);
 //        logger.debug(contentLengthHeader);
+        dos.writeBytes(NEW_LINE);
 
         dos.write(body, 0, body.length);
     }
