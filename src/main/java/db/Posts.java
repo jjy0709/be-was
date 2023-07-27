@@ -1,16 +1,15 @@
 package db;
 
 import model.Post;
-import model.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.List;
 
 public class Posts {
-    private static ConcurrentMap<User, Post> posts = new ConcurrentHashMap<>();
+    private static List<Post> posts = new ArrayList<>();
 
-    public static void addPost(Post post) { posts.put(post.getUser(), post); }
+    public static void addPost(Post post) { posts.add(post); }
 
-    public static Collection<Post> findAll() { return posts.values(); }
+    public static Collection<Post> findAll() { return List.copyOf(posts); }
 }

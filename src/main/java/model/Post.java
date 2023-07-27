@@ -6,13 +6,13 @@ public class Post {
     private User user;
     private String title;
     private String contents;
-    private String time;
+    private long time;
 
     public Post(User user, String title, String contents) {
         this.user = user;
         this.title = title;
         this.contents = contents;
-        this.time = dateFormatter.format(System.currentTimeMillis());
+        this.time = System.currentTimeMillis();
     }
 
     public User getUser() {
@@ -27,7 +27,13 @@ public class Post {
         return contents;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
+
+    public String getTimeString() {
+        return dateFormatter.format(time);
+    }
+
+
 }
