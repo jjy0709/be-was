@@ -19,7 +19,7 @@ public class Uri {
 
         parameters = Maps.newHashMap();
         if (splitUri.length > 1) {
-            parseParameters(URLDecoder.decode(splitUri[1],StandardCharsets.UTF_8));
+            parseParameters(URLDecoder.decode(splitUri[1], StandardCharsets.UTF_8));
         }
     }
 

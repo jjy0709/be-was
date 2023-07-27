@@ -3,9 +3,9 @@ package webserver.controllers;
 import service.PostService;
 import service.SessionService;
 import service.UserService;
+import webserver.http.enums.HttpResponseStatus;
 import webserver.http.request.HttpRequest;
 import webserver.http.response.HttpResponse;
-import webserver.http.enums.HttpResponseStatus;
 
 import java.util.HashMap;
 import java.util.Map;

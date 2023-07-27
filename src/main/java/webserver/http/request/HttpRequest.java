@@ -120,5 +120,7 @@ public class HttpRequest {
         return body;
     }
 
-    public Cookie cookie() { return cookie; }
+    public Cookie cookie() {
+        return cookie;
+    }
 }

@@ -3,7 +3,7 @@ package webserver.utils;
 import java.text.SimpleDateFormat;
 
 public class StringUtils {
-//    public static final String NEW_LINE = System.getProperty("line.separator");
+    //    public static final String NEW_LINE = System.getProperty("line.separator");
     public static final String NEW_LINE = "\r\n";
 
     public static final String STATIC_FILE_PATH = "src/main/resources/static";
@@ -17,7 +17,7 @@ public class StringUtils {
     }
 
     public static String getValueString(String line, int splitIndex) {
-        return line.substring(splitIndex+1).trim();
+        return line.substring(splitIndex + 1).trim();
     }
 
 }

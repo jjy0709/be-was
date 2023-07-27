@@ -51,8 +51,8 @@ public class ControllerContainer {
     }
 
     private void addAllClassToList(File dir, List<Class> classes, String packageName, ClassLoader classLoader) throws ClassNotFoundException {
-        for(File file: dir.listFiles()) {
-            if(file.isDirectory()) {
+        for (File file : dir.listFiles()) {
+            if (file.isDirectory()) {
                 String subPackageName = String.format("%s.%s", packageName, file.getName());
                 addAllClassToList(file, classes, subPackageName, classLoader);
                 continue;

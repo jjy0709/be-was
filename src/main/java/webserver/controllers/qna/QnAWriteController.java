@@ -29,7 +29,6 @@ public class QnAWriteController implements Controller {
         Map<String, String> parameters = request.body();
 
         if (!verifyParameter(parameters)) {
-            // todo: 에러 상황에 맞게 페이지 만들어서 반환
             return createErrorResponse(request, BAD_REQUEST);
         }
 

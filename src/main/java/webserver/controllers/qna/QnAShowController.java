@@ -34,17 +34,19 @@ public class QnAShowController implements Controller {
         User user = userSession.getUser();
 
         String postIndex = request.uri().getParameter("index");
-        if(postIndex == null)
+
+        if (postIndex == null)
             return createErrorResponse(request, BAD_REQUEST);
 
         Post post = postService.searchPostByIndex(Integer.parseInt(postIndex));
-        if(post == null)
+        if (post == null)
             return createErrorResponse(request, BAD_REQUEST);
 
-        attributes.put("${user}", "<li style=\"pointer-events: none;\" ><a>" + userSession.getUser().getName() + " 님</a></li>");
+        attributes.put("${user}", "<li style=\"pointer-events: none;\" ><a>" + user.getName() + " 님</a></li>");
         attributes.put("${postTitle}", post.getTitle());
         attributes.put("${postUser}", post.getUser().getName());
         attributes.put("${postTime}", post.getTimeString());
+        attributes.put("${postUserId}", post.getUser().getUserId());
 
         putPostContentToAttr(attributes, post);
 
@@ -55,7 +57,7 @@ public class QnAShowController implements Controller {
         StringBuilder stringBuilder = new StringBuilder();
 
         String[] lines = post.getContents().split("\n");
-        for(String line: lines) {
+        for (String line : lines) {
             stringBuilder.append(String.format("<p>%s</p>", line));
         }
 
