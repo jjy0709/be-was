@@ -4,16 +4,18 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.controllers.user.UserLoginController;
+import webserver.controllers.user.UserLogoutController;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 
 import java.io.IOException;
 
 import static webserver.http.enums.HttpResponseStatus.FOUND;
 
-class LogoutControllerTest {
+class UserLogoutControllerTest {
     SoftAssertions softly = new SoftAssertions();
-    LogoutController logoutController = new LogoutController();
+    UserLogoutController userLogoutController = new UserLogoutController();
     static UserLoginController userLoginController = new UserLoginController();
     static String sessionID;
 
@@ -42,7 +44,7 @@ class LogoutControllerTest {
                 .version("HTTP/1.1")
                 .build();
 
-        HttpResponse response = logoutController.handleGet(logoutRequest);
+        HttpResponse response = userLogoutController.handleGet(logoutRequest);
 
         softly.assertThat(response.status()).isEqualTo(FOUND);
         softly.assertThat(response.redirect()).isEqualTo("/index.html");
@@ -58,7 +60,7 @@ class LogoutControllerTest {
                 .version("HTTP/1.1")
                 .build();
 
-        HttpResponse response = logoutController.handleGet(logoutRequest);
+        HttpResponse response = userLogoutController.handleGet(logoutRequest);
 
         softly.assertThat(response.status()).isEqualTo(FOUND);
         softly.assertThat(response.redirect()).isEqualTo("/index.html");

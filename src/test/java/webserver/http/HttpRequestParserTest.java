@@ -3,6 +3,8 @@ package webserver.http;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import webserver.http.request.HttpRequest;
+import webserver.http.request.HttpRequestParser;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

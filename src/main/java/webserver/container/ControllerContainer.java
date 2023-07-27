@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import webserver.controllers.Controller;
 import webserver.controllers.annotations.RequestMethod;
 import webserver.controllers.annotations.RequestPath;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;

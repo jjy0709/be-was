@@ -1,6 +1,9 @@
-package webserver.http;
+package webserver.http.request;
 
 import com.google.common.collect.Maps;
+import webserver.http.Cookie;
+import webserver.http.Headers;
+import webserver.http.Uri;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,13 +13,13 @@ import static webserver.utils.StringUtils.getValueString;
 
 public class HttpRequest {
     private String method;
-    private HttpUri uri;
+    private Uri uri;
     private String version;
-    private HttpHeaders headers;
+    private Headers headers;
     private Map<String, String> body;
     private Cookie cookie;
 
-    private HttpRequest(String method, HttpUri uri, String version, HttpHeaders headers,
+    private HttpRequest(String method, Uri uri, String version, Headers headers,
                         Map<String, String> body, Cookie cookie) {
         this.method = method;
         this.uri = uri;
@@ -28,19 +31,19 @@ public class HttpRequest {
 
     public static class Builder {
         private String method;
-        private HttpUri uri;
+        private Uri uri;
         private String version;
-        private HttpHeaders headers;
+        private Headers headers;
         private Map<String, String> body;
         private Cookie cookie;
 
         public Builder() {
-            this.headers = new HttpHeaders();
+            this.headers = new Headers();
             this.body = new HashMap<>();
         }
 
         public HttpRequest.Builder uri(String uri) {
-            this.uri = new HttpUri(uri);
+            this.uri = new Uri(uri);
             return this;
         }
 
@@ -97,7 +100,7 @@ public class HttpRequest {
         return method;
     }
 
-    public HttpUri uri() {
+    public Uri uri() {
         return uri;
     }
 
@@ -105,7 +108,7 @@ public class HttpRequest {
         return version;
     }
 
-    public HttpHeaders headers() {
+    public Headers headers() {
         return headers;
     }
 

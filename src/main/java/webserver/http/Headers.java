@@ -5,10 +5,10 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.Set;
 
-public class HttpHeaders {
+public class Headers {
     private final Map<String, String> headers;
 
-    public HttpHeaders() {
+    public Headers() {
         this.headers = Maps.newHashMap();
     }
 

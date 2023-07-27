@@ -9,11 +9,11 @@ import java.util.Map;
 import static webserver.utils.StringUtils.getKeyString;
 import static webserver.utils.StringUtils.getValueString;
 
-public class HttpUri {
+public class Uri {
     private String path;
     private Map<String, String> parameters;
 
-    public HttpUri(String uri) {
+    public Uri(String uri) {
         String[] splitUri = uri.split("\\?");
         this.path = splitUri[0];
 

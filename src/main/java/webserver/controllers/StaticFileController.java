@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import webserver.controllers.annotations.RequestMethod;
 import webserver.controllers.annotations.RequestPath;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 import webserver.http.enums.ContentType;
 
 import java.nio.file.Files;

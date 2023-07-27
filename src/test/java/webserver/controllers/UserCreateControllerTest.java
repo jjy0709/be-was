@@ -6,13 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.controllers.user.UserCreateController;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import static webserver.http.enums.ContentType.HTML;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
 import static webserver.http.enums.HttpResponseStatus.FOUND;
 

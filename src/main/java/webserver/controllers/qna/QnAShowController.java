@@ -1,14 +1,15 @@
-package webserver.controllers;
+package webserver.controllers.qna;
 
 import model.Post;
 import model.Session;
 import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import webserver.controllers.Controller;
 import webserver.controllers.annotations.RequestMethod;
 import webserver.controllers.annotations.RequestPath;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
 
 @RequestPath(path = "/qna/show.html")
-public class QnAShowController implements Controller{
+public class QnAShowController implements Controller {
     private static final Logger logger = LoggerFactory.getLogger(QnAShowController.class);
 
     @RequestMethod(method = "GET")

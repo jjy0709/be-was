@@ -1,19 +1,20 @@
-package webserver.controllers;
+package webserver.controllers.user;
 
 import model.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import webserver.controllers.Controller;
 import webserver.controllers.annotations.RequestMethod;
 import webserver.controllers.annotations.RequestPath;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 
 import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.HttpResponseStatus.FOUND;
 
 @RequestPath(path = "/user/logout")
-public class LogoutController implements Controller {
-    private static final Logger logger = LoggerFactory.getLogger(LogoutController.class);
+public class UserLogoutController implements Controller {
+    private static final Logger logger = LoggerFactory.getLogger(UserLogoutController.class);
 
     @RequestMethod(method = "GET")
     public HttpResponse handleGet(HttpRequest request) {

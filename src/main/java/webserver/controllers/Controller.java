@@ -3,8 +3,8 @@ package webserver.controllers;
 import service.PostService;
 import service.SessionService;
 import service.UserService;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 import webserver.http.enums.HttpResponseStatus;
 
 import java.util.HashMap;

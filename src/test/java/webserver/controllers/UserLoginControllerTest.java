@@ -4,12 +4,12 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import webserver.http.HttpRequest;
-import webserver.http.HttpResponse;
+import webserver.controllers.user.UserCreateController;
+import webserver.controllers.user.UserLoginController;
+import webserver.http.request.HttpRequest;
+import webserver.http.response.HttpResponse;
 
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserLoginControllerTest {
     SoftAssertions softly = new SoftAssertions();
