@@ -162,7 +162,7 @@ Java Web Application Server 2023
 [X] 작성된 글을 저장할 수 있는 DB 추가
 [X] index.html에 작성된 글 로드하는 로직 추가
 [X] 세부 글 표시 Controller 추가
-[ ] 에러 처리
-용
+[X] 에러 처리용 페이지 구현...
+
 [ ] 고민: profile.html, form.html, list.html 등 로그인 상태를 확인해야 하는 static file 경로의 경우 같은 일을 하지만 여러 Controller가 생긴다. -> 중복 해결 방법 고려해보기
 

@@ -34,6 +34,10 @@ public class QnAWriteController implements Controller {
             return createErrorResponse(request, BAD_REQUEST);
         }
 
+        if (parameters.containsValue("")) {
+            return createFoundResponse(request, "/qna/form_failed.html");
+        }
+
         Session session = getSession(request.cookie().getSessionId());
         User user = session.getUser();
 
@@ -48,6 +52,6 @@ public class QnAWriteController implements Controller {
         if (!parameters.keySet().equals(essentialField)) {
             return false;
         }
-        return !parameters.containsValue("");
+        return true;
     }
 }

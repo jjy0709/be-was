@@ -4,6 +4,7 @@ import webserver.http.HttpRequest;
 import webserver.http.HttpResponse;
 import webserver.http.enums.HttpResponseStatus;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static webserver.http.enums.HttpResponseStatus.FOUND;
@@ -14,8 +15,15 @@ public interface Controller {
     // TODO: Exception으로 빼서 handle?
     default HttpResponse createErrorResponse(HttpRequest request, HttpResponseStatus status) {
         HttpResponse.Builder builder = HttpResponse.newBuilder();
+
+        Map<String, String> attr = new HashMap<>();
+        attr.put("${errorCode}", String.valueOf(status.getStatusCode()));
+        attr.put("${errorMessage}", status.getStatusText());
+
         return builder.version(request.version())
                 .status(status)
+                .fileName("src/main/resources/templates/error/error.html")
+                .setAttribute(attr)
                 .build();
     }
 

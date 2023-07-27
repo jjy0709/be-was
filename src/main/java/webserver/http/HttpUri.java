@@ -3,6 +3,7 @@ package webserver.http;
 import com.google.common.collect.Maps;
 
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static webserver.utils.StringUtils.getKeyString;
@@ -18,7 +19,7 @@ public class HttpUri {
 
         parameters = Maps.newHashMap();
         if (splitUri.length > 1) {
-            parseParameters(URLDecoder.decode(splitUri[1]));
+            parseParameters(URLDecoder.decode(splitUri[1],StandardCharsets.UTF_8));
         }
     }
 
