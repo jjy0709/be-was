@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static webserver.http.Cookie.isValidCookie;
+import static webserver.utils.StringUtils.TEMPLATE_PATH;
 
 @RequestPath(path = "/user/list.html")
 public class UserListController implements Controller {
@@ -33,7 +34,7 @@ public class UserListController implements Controller {
         }
 
         Map<String, String> attributes = new HashMap<>();
-        String filePath = "src/main/resources/templates/user/list.html";
+        String filePath = TEMPLATE_PATH.concat("/user/list.html");
         Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
 
         attributes.put("${user}", "<li style=\"pointer-events: none;\" ><a>" + userSession.getUser().getName() + " 님</a></li>");

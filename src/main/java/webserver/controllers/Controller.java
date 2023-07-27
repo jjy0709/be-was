@@ -16,8 +16,6 @@ public interface Controller {
     SessionService sessionService = SessionService.getInstance();
     PostService postService = PostService.getInstance();
 
-
-    // TODO: Exception으로 빼서 handle?
     default HttpResponse createErrorResponse(HttpRequest request, HttpResponseStatus status) {
         HttpResponse.Builder builder = HttpResponse.newBuilder();
 

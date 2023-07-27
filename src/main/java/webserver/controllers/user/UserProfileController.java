@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static webserver.http.Cookie.isValidCookie;
+import static webserver.utils.StringUtils.TEMPLATE_PATH;
 
 @RequestPath(path = "/user/profile.html")
 public class UserProfileController implements Controller {
@@ -26,7 +27,7 @@ public class UserProfileController implements Controller {
         }
 
         Map<String, String> attributes = new HashMap<>();
-        String fileName = "src/main/resources/templates/user/profile.html";
+        String fileName = TEMPLATE_PATH.concat("/user/profile.html");
         Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = getUserInfo(userSession, request);
 

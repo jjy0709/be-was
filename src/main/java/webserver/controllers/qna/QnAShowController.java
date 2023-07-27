@@ -16,6 +16,7 @@ import java.util.Map;
 
 import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
+import static webserver.utils.StringUtils.TEMPLATE_PATH;
 
 @RequestPath(path = "/qna/show.html")
 public class QnAShowController implements Controller {
@@ -28,7 +29,7 @@ public class QnAShowController implements Controller {
         }
 
         Map<String, String> attributes = new HashMap<>();
-        String fileName = "src/main/resources/templates/qna/show.html";
+        String fileName = TEMPLATE_PATH.concat("/qna/show.html");
         Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = userSession.getUser();
 

@@ -20,6 +20,8 @@ import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.ContentType.HTML;
 import static webserver.http.enums.ContentType.getContentTypeOfFile;
 import static webserver.http.enums.HttpResponseStatus.NOT_FOUND;
+import static webserver.utils.StringUtils.STATIC_FILE_PATH;
+import static webserver.utils.StringUtils.TEMPLATE_PATH;
 
 @RequestPath(path = "/")
 public class StaticFileController implements Controller {
@@ -64,9 +66,9 @@ public class StaticFileController implements Controller {
 
     private String getPathString(String fileName, ContentType contentType) {
         if (contentType == HTML) {
-            return "src/main/resources/templates".concat(fileName);
+            return TEMPLATE_PATH.concat(fileName);
         }
-        return "src/main/resources/static".concat(fileName);
+        return STATIC_FILE_PATH.concat(fileName);
     }
 
     private void addPostTags(Map<String, String> attributes) {

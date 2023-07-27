@@ -19,7 +19,7 @@ public class SessionService {
     }
 
     public boolean isValidSession(String sessionId) {
-        return searchSessionById(sessionId) != null;
+        return Sessions.getSessionById(sessionId) != null;
     }
 
     public void deleteSession(Session session) {

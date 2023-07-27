@@ -6,6 +6,10 @@ public class StringUtils {
 //    public static final String NEW_LINE = System.getProperty("line.separator");
     public static final String NEW_LINE = "\r\n";
 
+    public static final String STATIC_FILE_PATH = "src/main/resources/static";
+
+    public static final String TEMPLATE_PATH = "src/main/resources/templates";
+
     public static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
     public static String getKeyString(String line, int splitIndex) {

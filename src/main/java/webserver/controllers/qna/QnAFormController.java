@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static webserver.http.Cookie.isValidCookie;
+import static webserver.utils.StringUtils.TEMPLATE_PATH;
 
 @RequestPath(path = "/qna/form.html")
 public class QnAFormController implements Controller {
@@ -26,7 +27,7 @@ public class QnAFormController implements Controller {
         }
 
         Map<String, String> attributes = new HashMap<>();
-        String fileName = "src/main/resources/templates/qna/form.html";
+        String fileName = TEMPLATE_PATH.concat("/qna/form.html");
         Session userSession = sessionService.searchSessionById(request.cookie().getSessionId());
         User user = userSession.getUser();
 

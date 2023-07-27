@@ -1,8 +1,8 @@
 package webserver.http;
 
-import java.util.Map;
+import service.SessionService;
 
-import static service.SessionService.isValidSession;
+import java.util.Map;
 
 public class Cookie {
     private Map<String, String> attributes;
@@ -19,6 +19,6 @@ public class Cookie {
         if (cookie == null)
             return false;
 
-        return isValidSession(cookie.getSessionId());
+        return SessionService.getInstance().isValidSession(cookie.getSessionId());
     }
 }

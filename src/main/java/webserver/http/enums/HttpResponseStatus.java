@@ -1,19 +1,18 @@
 package webserver.http.enums;
 
 public enum HttpResponseStatus {
-    OK(200, "OK", ""),
-    FOUND(302, "Found", ""),
-    BAD_REQUEST(400, "Bad Request", "잘못된 요청입니다."),
-    NOT_FOUND(404, "Not Found", "요청한 파일을 찾을 수 없습니다.");
+    OK(200, "OK"),
+    FOUND(302, "Found"),
+    BAD_REQUEST(400, "Bad Request"),
+    NOT_FOUND(404, "Not Found"),
+    METHOD_NOT_ALLOWED(405, "Method Not Allowed");
 
     private int statusCode;
     private String statusText;
-    private String body;
 
-    HttpResponseStatus(int statusCode, String statusText, String body) {
+    HttpResponseStatus(int statusCode, String statusText) {
         this.statusCode = statusCode;
         this.statusText = statusText;
-        this.body = body;
     }
 
     public int getStatusCode() {
@@ -24,7 +23,4 @@ public enum HttpResponseStatus {
         return statusText;
     }
 
-    public String getBody() {
-        return body;
-    }
 }
