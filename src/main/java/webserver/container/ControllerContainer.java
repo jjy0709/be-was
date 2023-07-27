@@ -41,18 +41,28 @@ public class ControllerContainer {
 
         File controllerDir = Paths.get(classLoader.getResource(packagePath).toURI()).toFile();
 
-        File[] files = controllerDir.listFiles((dir, name) -> name.contains("Controller"));
         List<Class> classes = new ArrayList<>();
 
-        for (File file : files) {
+        addAllClassToList(controllerDir, classes, packageName, classLoader);
+
+        addControllerToMap(classes);
+
+        setStaticController();
+    }
+
+    private void addAllClassToList(File dir, List<Class> classes, String packageName, ClassLoader classLoader) throws ClassNotFoundException {
+        for(File file: dir.listFiles()) {
+            if(file.isDirectory()) {
+                String subPackageName = String.format("%s.%s", packageName, file.getName());
+                addAllClassToList(file, classes, subPackageName, classLoader);
+                continue;
+            }
             String className = packageName + "." + file.getName().replace(".class", "");
             Class<?> clazz = classLoader.loadClass(className);
             classes.add(clazz);
         }
-
-        addControllerToMap(classes);
-        setStaticController();
     }
+
 
     private void setStaticController() {
         staticFileController = controllerMap.get("/");
