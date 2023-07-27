@@ -158,7 +158,7 @@ Java Web Application Server 2023
 ### TODO
 [X] write.html 작성
 [X] 버튼 클릭 시 이동하도록 수정
-[ ] 관련 Controller 추가
-[ ] 작성된 글을 저장할 수 있는 DB 추가
+[X] 관련 Controller 추가
+[X] 작성된 글을 저장할 수 있는 DB 추가
 [ ] index.html에 작성된 글 로드하는 로직 추가
 [ ] 에러 처리

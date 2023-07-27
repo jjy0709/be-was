@@ -1,5 +1,6 @@
 package webserver.controllers;
 
+import model.Post;
 import model.Session;
 import model.User;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import webserver.http.HttpResponse;
 import java.util.Map;
 import java.util.Set;
 
+import static db.Posts.addPost;
 import static service.SessionService.getSession;
 import static webserver.http.Cookie.isValidCookie;
 import static webserver.http.enums.HttpResponseStatus.BAD_REQUEST;
