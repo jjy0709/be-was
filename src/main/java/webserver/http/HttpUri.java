@@ -35,6 +35,14 @@ public class HttpUri {
         return parameters;
     }
 
+    public String getParameter(String key) {
+        return parameters.get(key);
+    }
+
+    public boolean hasParameter() {
+        return parameters.size() > 0;
+    }
+
     private void parseParameters(String paramString) {
         String[] params = paramString.split("&");
         for (String param : params) {
